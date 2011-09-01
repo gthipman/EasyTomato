@@ -75,7 +75,7 @@ function init()
 <body onload='init()'>
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
-	<div class='title'>Tomato</div>
+	<div class='title'>EasyTomato</div>
 	<div class='version'>Version <% version(); %></div>
 </td></tr>
 <tr id='body'><td id='navi'><script type='text/javascript'>navi()</script></td>
@@ -86,7 +86,11 @@ function init()
 <img src='kinaree.png' alt='Linux &amp; Tomato' id='tux'>
 </div>
 <div style='margin:30px 30px;font-size:14px;color:#555;'>
-<b>Tomato Firmware v<% version(1); %></b><br>
+<b>EasyTomato Firmware v<% version(1); %></b><br>
+Copyright (C) 2011 Relief Labs International
+<a href="http://www.easytomato.org">http://www.easytomato.org</a>
+
+<b>Based on Tomato Firmware v<% version(1); %></b><br>
 - Linux kernel <% version(2); %> and Broadcom Wireless Driver <% version(3); %> updates<br>
 - Support for additional router models, dual-band and Wireless-N mode.<br>
 <!-- USB-BEGIN -->
@@ -104,7 +108,7 @@ VPN integration and GUI Copyright (C) 2010 Keith Moyer,<br>
 <a href='mailto:tomatovpn@keithmoyer.com'>tomatovpn@keithmoyer.com</a><br>
 <!-- VPN-END -->
 <br>
-<b>This compilation by Toastman may also include:</b><br>
+<b>This version is extended from a build by Toastman and may also include:</b><br>
 <br>
 <b>"Teddy Bear" current features, notably:</b><br>
 - USB Support, Samba, FTP, Media Servers<br>
