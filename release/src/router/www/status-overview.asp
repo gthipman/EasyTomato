@@ -178,6 +178,35 @@ function init()
 
 <!-- / / / -->
 
+<div class='section-title' style='font-size:2em;'>Important Information</div>
+<div class='section'>
+  <script type='text/javascript'>
+    sec = auth[nvram['wl'+u+'_security_mode']] + '';
+    if (sec.indexOf('WPA') != -1) sec += ' + ' + enc[nvram['wl'+u+'_crypto']];
+
+    createFieldTable('', [,
+	{ title: '<b>Wireless Network Name</b>', text: '<b>'+nvram['wl'+u+'_ssid']+'</b>' },
+	{ title: '<b>Status</b>', rid: 'wanstatus', text: (stats.wanstatus == 'Connected') ? '<span style=\'color:green; font-weight:bold;\'>Everything Looks Good!</span>' : '<span style=\'color:red; font-weight:bold;\'>Error! Error! Error!</span>' },
+       	{ title: 'External IP Address', rid: 'wanip', text: stats.wanip },
+	{ title: 'Internal IP Address', text: nvram.lan_ipaddr },
+	{ title: 'Date &amp; Time', rid: 'time', text: stats.time },
+	{ title: 'Router Uptime', rid: 'uptime', text: stats.uptime },
+	{ title: 'Connection Uptime', rid: 'wanuptime', text: stats.wanuptime },
+	{ title: 'CPU Load <small>(1 / 5 / 15 mins)</small>', rid: 'cpu', text: stats.cpuload },
+	{ title: 'Total / Free Memory', rid: 'memory', text: stats.memory },
+	{ title: 'Wireless Security Mode', text: sec }
+    ]);
+</script>
+</div>
+
+<a href='javascript:if (document.getElementById("status-details").style.display == "none") {
+   document.getElementById("status-details").style.display = "inline"
+   } else {
+   document.getElementById("status-details").style.display = "none"
+   }
+   '>Toggle Details</a><br><br>
+<div id='status-details' style='display:none'>
+
 <div class='section-title'>System</div>
 <div class='section'>
 <script type='text/javascript'>
@@ -203,7 +232,7 @@ createFieldTable('', [
 createFieldTable('', [
 	{ title: 'MAC Address', text: nvram.wan_hwaddr },
 	{ title: 'Connection Type', text: { 'dhcp':'DHCP', 'static':'Static IP', 'pppoe':'PPPoE', 'pptp':'PPTP', 'l2tp':'L2TP' }[nvram.wan_proto] || '-' },
-	{ title: 'IP Address', rid: 'wanip', text: stats.wanip },
+	{ title: 'External IP Address', rid: 'wanip', text: stats.wanip },
 	{ title: 'Previous WAN IP', rid: 'wanprebuf',text:stats.wanprebuf }, //Victek
 	{ title: 'Subnet Mask', rid: 'wannetmask', text: stats.wannetmask },
 	{ title: 'Gateway', rid: 'wangateway', text: stats.wangateway },
@@ -213,7 +242,7 @@ createFieldTable('', [
 	{ title: 'DNS', rid: 'dns', text: stats.dns },
 	{ title: 'MTU', text: nvram.wan_run_mtu },
 	null,
-	{ title: 'Status', rid: 'wanstatus', text: stats.wanstatus },
+	{ title: '<b>Status</b>', rid: 'wanstatus', text: (stats.wanstatus == 'Connected') ? '<span style=\'color:green; font-weight:bold;\'>Connected</span>' : '<span style=\'color:red; font-weight:bold;\'>Error!</span>' },
 	{ title: 'Connection Uptime', rid: 'wanuptime', text: stats.wanuptime },
 	{ title: 'Remaining Lease Time', rid: 'wanlease', text: stats.wanlease, ignore: !show_dhcpc }
 ]);
@@ -243,7 +272,7 @@ else {
 }
 createFieldTable('', [
 	{ title: 'Router MAC Address', text: nvram.et0macaddr },
-	{ title: 'Router IP Address', text: nvram.lan_ipaddr },
+	{ title: 'Internal IP Address', text: nvram.lan_ipaddr },
 	{ title: 'Subnet Mask', text: nvram.lan_netmask },
 	{ title: 'Gateway', text: nvram.lan_gateway, ignore: nvram.wan_proto != 'disabled' },
 /* IPV6-BEGIN */
@@ -276,8 +305,8 @@ createFieldTable('', [
 	{ title: 'Wireless Mode', text: wmode },
 	{ title: 'Wireless Network Mode', text: bgmo[nvram['wl'+u+'_net_mode']] },
 	{ title: 'Radio', rid: 'radio'+uidx, text: (wlstats[uidx].radio == 0) ? '<b>Disabled</b>' : 'Enabled' },
-	{ title: 'SSID', text: nvram['wl'+u+'_ssid'] },
-	{ title: 'Security', text: sec },
+	{ title: '<b>Wireless Network Name</b>', text: '<b>'+nvram['wl'+u+'_ssid']+'</b>' },
+	{ title: 'Security Mode', text: sec },
 	{ title: 'Channel', rid: 'channel'+uidx, text: stats.channel[uidx] },
 	{ title: 'Channel Width', rid: 'nbw'+uidx, text: wlstats[uidx].nbw, ignore: !nphy },
 	{ title: 'Interference Level', rid: 'interference'+uidx, text: stats.interference[uidx], hidden: (stats.interference[uidx] == '') },
@@ -292,7 +321,7 @@ W('<input type=\'button\' class=\'controls\' onclick=\'wlenable('+uidx+', 0)\' i
 W('</div>');
 }
 </script>
-
+</div>
 
 <!-- / / / -->
 
